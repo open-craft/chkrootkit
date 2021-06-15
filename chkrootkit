@@ -311,7 +311,7 @@ lkm ()
     prog=""
     if [  \( "${SYSTEM}" = "Linux"  -o \( "${SYSTEM}" = "FreeBSD" -a \
        `echo ${V} | ${awk} '{ if ($1 > 4.3 || $1 < 6.0) print 1; else print 0 }'` -eq 1 \) \) -a "${ROOTDIR}" = "/" ]; then
-       [  -x ./chkproc -a "`find /proc 2>/dev/null| wc -l`" -gt 1 ] && prog="./chkproc"
+       [  -x ./chkproc -a "`find /proc -maxdepth 1 2>/dev/null| wc -l`" -gt 1 ] && prog="./chkproc"
       [  -x ./chkdirs ] && prog="$prog ./chkdirs"
       if [ "$prog" = "" -o ${mode} = "pm" ]; then
          echo "not tested: can't exec $prog"
